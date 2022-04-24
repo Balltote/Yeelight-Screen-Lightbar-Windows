@@ -1,5 +1,6 @@
 # Yeelight-Screen-Lightbar-Windows-Desktop
 Small Windows Desktop program to control Yeelight Screen Lightbar.
+This program only supported Yeelight Screen Lightbar as shown in the pic below
 ![index](https://user-images.githubusercontent.com/104300074/164970065-77368b00-7c03-448c-ac75-0d48f364f34b.jpeg)
 
 prerequisite :
