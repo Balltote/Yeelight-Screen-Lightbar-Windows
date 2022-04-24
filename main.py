@@ -77,7 +77,6 @@ def get_bulbIP():
         splash_window.destroy() # After the button is pressed and that a valid IP is input it closes the window
 
     # This button calls the function declared higher
-    splash_window.bind("<Return>", save_bulb)
     set_btn = tk.Button(splash_window, image=set_button_image, borderwidth=0, command=save_bulb)
     set_btn.pack(padx=5, pady=5, side="bottom")
     splash_window.bind("<Return>", keybinding)
