@@ -1,3 +1,4 @@
+from asyncio import events
 from asyncio.subprocess import PIPE
 from email.policy import default
 from msilib.schema import Icon
@@ -53,14 +54,22 @@ def get_bulbIP():
     set_button_image=tk.PhotoImage(file=resource_path("images/set.png"))
     label = tk.Label(splash_window, text="Please Enter the Screen Lightbar IP ")
     label.pack(padx=5, pady=5, side="top")
-    
+    #splash_window.bind("<Return>", save_bulb)
 
     IP = tk.StringVar()
     entry = tk.Entry(splash_window, width=20, textvariable=IP)
     entry.pack(padx=5, pady=5, side="top")
     entry.focus_force()
 
-    def save_bulb(event):
+    def keybinding(evnt):
+        bulb = entry.get()
+        with open(tempfldr+"/bulbIP.txt", "w") as reader:
+            reader.truncate(0) # Here it's just to keep the IP part and no whitespaces-
+            reader.write(bulb)
+        splash_window.destroy()
+        
+
+    def save_bulb():
         bulb = entry.get()
         with open(tempfldr+"/bulbIP.txt", "w") as reader:
             reader.truncate(0) # Here it's just to keep the IP part and no whitespaces-
@@ -68,12 +77,10 @@ def get_bulbIP():
         splash_window.destroy() # After the button is pressed and that a valid IP is input it closes the window
 
     # This button calls the function declared higher
+    splash_window.bind("<Return>", save_bulb)
     set_btn = tk.Button(splash_window, image=set_button_image, borderwidth=0, command=save_bulb)
     set_btn.pack(padx=5, pady=5, side="bottom")
-    splash_window.bind("<Return>", save_bulb)
-
-
-
+    splash_window.bind("<Return>", keybinding)
     splash_window.mainloop()
 
 # Check if the IP is valid
